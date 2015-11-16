@@ -419,3 +419,46 @@ end
 def get_larger_numbers(a, b)
   a.zip(b).map {|x, y| x > y ? x : y}
 end
+
+
+### Green Glass Door  ###
+#
+#Step through my green glass door.
+#You can take the moon, but not the sun.
+#You can take your slippers, but not your sandals.
+#You can go through yelling, but not shouting.
+#You can't run through fast, but you can run with speed.
+#You can take a sheet, but not your blanket.
+#You can wear your glasses, but not your contacts.
+#Have you figured it out? Good! Then write a program that can figure it out as well
+#
+#Test.assert_equals(step_through_with("moon"), true,
+#Test.assert_equals(step_through_with("test")
+#
+#We have to check if the input string got repetitions in it.
+#
+#
+#
+#  While solving that i wrote this code. And it seemed interesting to me.
+#  str = "You can take the moon, but not the sun"
+#  str.split(",")[1] - this will return the part after comma.
+#  str.split(",")[0] - this will return the part before comma.
+### My Solution ###
+
+def step_through_with(s)i
+  # It doesn't solve the kata because it returns true even if same chars are met in diffrent part of the word. Like "ThaT"
+  s.chars.count == s.chars.uniq.count
+end
+
+### Other Solutions ###
+
+def step_through_with(s)
+  !!s[/(.)\1/]
+end
+
+def step_through_with(s)
+  # Found out how String#squeeze works. It returns a string without duplications accuring one after another.
+  s.squeeze != s
+end
+
+
