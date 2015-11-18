@@ -462,3 +462,55 @@ def step_through_with(s)
 end
 
 
+
+### Number of People in the Bus ###
+
+
+=begin
+
+There is a bus moving in the city, and it takes and drop some people in each bus stop.
+
+You are provided a list (or array in JS) of integer array. Each integer array has two
+ items which represent number of people get into bus (The first item) and number of
+  people get off the bus (The second item).
+The first integer array has 0 number in the second item, since the bus is empty in 
+the first bus stop.
+Your task is to return number of people in the bus after the last bus station. 
+Take a look on the test cases :)
+Please keep in mind that the test cases ensure that the number of
+people in the bus is always >= 0. So the return integer can't be negative.
+
+describe "number" do
+  it "works for some examples" do
+    Test.assert_equals number([[10, 0], [3, 5], [5, 8]]), 5, "didn't work for [[10, 0], [3, 5], [5, 8]]"
+    Test.assert_equals number([[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]), 17, "didn't work for [[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]"
+    Test.assert_equals number([[3, 0], [9, 1], [4, 8], [12, 2], [6, 1], [7, 8]]), 21, "didn't work for [[3, 0], [9, 1], [4, 8], [12, 2], [6, 1], [7, 8]]"
+  end
+end
+
+=end
+
+
+### My Solution ###
+
+def number(bus_stops)
+  x = bus_stops.flatten
+  ins = x.select.with_index{|_,i| (i+2) % 2 == 0}.inject(:+)
+  outs = x.each_slice(2).map(&:last).inject(:+)
+  ins - outs
+end
+
+### Other Solutions ###
+
+def number(bus_stops)
+  bus_stops.map {|(on,off)| on - off }.reduce(:+)
+end
+
+def number(bus_stops)
+  bus_stops.map{|x| x[0] - x[1]}.reduce(0, :+)
+end
+
+def number(bus_stops)
+  bus_stops = bus_stops.map {|stop| stop[0] - stop[1]}
+  bus_stops.inject(&:+)
+end
